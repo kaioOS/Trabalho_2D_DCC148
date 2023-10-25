@@ -7,8 +7,13 @@ public class Player : MonoBehaviour
     public float speed;
 
     private Rigidbody2D rig;
-    private Vector2 direction;
+    private Vector2 _direction;
 
+    public Vector2 direction
+    {
+        get { return _direction; }
+        set { _direction = value; }
+    }
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
@@ -21,6 +26,6 @@ public class Player : MonoBehaviour
     private void FixedUpdate()
     {
         //Debug.Log($"Speed:{speed}");
-        rig.MovePosition(rig.position + direction * speed * Time.fixedDeltaTime );
+        rig.MovePosition(rig.position + _direction * speed * Time.fixedDeltaTime );
     }
 }
