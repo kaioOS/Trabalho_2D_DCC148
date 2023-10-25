@@ -16,21 +16,54 @@ public class NewBehaviourScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(player.direction.sqrMagnitude  > 0)
+        onMove();
+        onRun();
+    }
+    #region Movement
+        void onMove()
         {
-            anim.SetInteger("transition", 1);
+            if(player.direction.sqrMagnitude  > 0)
+            {
+                if(player.isRolling)
+                {
+                    onRoll();
+                }
+                else
+                {
+                    onWalk();
+                }
+            }
+            else 
+            {
+                onIdle();
+            }
+            if(player.direction.x > 0)
+            {
+                transform.eulerAngles = new Vector2(0,0);
+            }
+            if(player.direction.x < 0)
+            {
+                transform.eulerAngles = new Vector2(0,180); //Rotaciona o personagem para a esquerda
+            }
         }
-        else 
+        void onIdle()
         {
             anim.SetInteger("transition", 0);
         }
-        if(player.direction.x > 0)
+        void onWalk()
         {
-            transform.eulerAngles = new Vector2(0,0);
+            anim.SetInteger("transition",1);
         }
-        if(player.direction.x < 0)
+        void onRun()
         {
-            transform.eulerAngles = new Vector2(0,180); //Rotaciona o personagem para a esquerda
+            if(player.isRunning)
+            {
+                anim.SetInteger("transition",2);
+            }
         }
-    }
+        void onRoll()
+        {
+            anim.SetTrigger("isRolling");
+        }
+    #endregion
 }
