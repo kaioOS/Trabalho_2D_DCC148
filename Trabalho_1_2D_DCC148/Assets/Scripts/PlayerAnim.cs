@@ -18,6 +18,7 @@ public class NewBehaviourScript : MonoBehaviour
     {
         onMove();
         onRun();
+        onCut();
     }
     #region Movement
         void onMove()
@@ -64,6 +65,15 @@ public class NewBehaviourScript : MonoBehaviour
         void onRoll()
         {
             anim.SetTrigger("isRolling");
+        }
+    #endregion
+    #region Action
+        void onCut()
+        {
+            if(player.isCutting)
+            {
+                anim.SetInteger("transition",3);
+            }
         }
     #endregion
 }

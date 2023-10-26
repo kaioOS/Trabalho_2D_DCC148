@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
 
     private bool _isRunning;
     private bool _isRolling;
+    private bool _isCutting;
 
     private Vector2 _direction;
     //Colisão
@@ -32,6 +33,11 @@ public class Player : MonoBehaviour
         get { return _isRolling; }
         set { _isRolling = value; }
     }
+    public bool isCutting
+    {
+        get { return _isCutting; }
+        set { _isCutting = value; }
+    }
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
@@ -42,6 +48,7 @@ public class Player : MonoBehaviour
         onInput();
         onRun(); 
         onRoll();
+        onCut();
     }
     
     private void FixedUpdate()
@@ -82,6 +89,21 @@ public class Player : MonoBehaviour
             {
                 speed = initialSpeed;
                 _isRolling = false;
+            }
+        }
+    #endregion
+    #region Action
+        void onCut()
+        {
+            if(Input.GetMouseButtonDown(0)) //Verifica se o botão direito do mouse (botão para esquiva) foi pressionado
+            {
+                _isCutting = true;
+                speed = 0f;
+            }
+            if(Input.GetMouseButtonUp(0)) //Verifica se o botão direito do mouse (botão para esquiva) foi pressionado
+            {
+                _isCutting = false;
+                speed = initialSpeed;
             }
         }
     #endregion
