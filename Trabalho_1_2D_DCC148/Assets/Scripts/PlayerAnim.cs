@@ -19,6 +19,7 @@ public class NewBehaviourScript : MonoBehaviour
         onMove();
         onRun();
         onCut();
+        onDig();
     }
     #region Movement
         void onMove()
@@ -73,6 +74,13 @@ public class NewBehaviourScript : MonoBehaviour
             if(player.isCutting)
             {
                 anim.SetInteger("transition",3);
+            }
+        }
+        void onDig()
+        {
+            if(player.isDigging)
+            {
+                anim.SetInteger("transition",4);
             }
         }
     #endregion

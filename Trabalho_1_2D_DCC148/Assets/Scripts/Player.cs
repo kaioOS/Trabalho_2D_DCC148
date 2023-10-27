@@ -12,8 +12,10 @@ public class Player : MonoBehaviour
     private bool _isRunning;
     private bool _isRolling;
     private bool _isCutting;
+    private bool _isDigging;
 
     private Vector2 _direction;
+    private int handlingObj;
     //Colisão
     private Rigidbody2D rig;
     
@@ -38,6 +40,11 @@ public class Player : MonoBehaviour
         get { return _isCutting; }
         set { _isCutting = value; }
     }
+    public bool isDigging
+    {
+        get { return _isDigging; }
+        set { _isDigging = value; }
+    }
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
@@ -45,16 +52,33 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            handlingObj = 1;
+        }
+        else if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            handlingObj = 2;
+        }
         onInput();
         onRun(); 
         onRoll();
-        onCut();
+        if (handlingObj == 1)
+        {
+            onCut();
+        }
+        else if (handlingObj == 2)
+        {
+            onDig();
+        }
     }
     
     private void FixedUpdate()
     {
         onMove();   
     }
+
     #region Movement
         void onInput()
         {
@@ -85,24 +109,38 @@ public class Player : MonoBehaviour
                 speed = runSpeed;
                 _isRolling = true;
             }
-            if(Input.GetMouseButtonUp(1)) //Verifica se o botão direito do mouse (botão para esquiva) foi pressionado
+            if(Input.GetMouseButtonUp(1)) 
             {
                 speed = initialSpeed;
                 _isRolling = false;
             }
         }
     #endregion
+
     #region Action
         void onCut()
         {
-            if(Input.GetMouseButtonDown(0)) //Verifica se o botão direito do mouse (botão para esquiva) foi pressionado
+            if(Input.GetMouseButtonDown(0)) //Verifica se o botão esquedo do mouse (botão para ação) foi pressionado
             {
                 _isCutting = true;
                 speed = 0f;
             }
-            if(Input.GetMouseButtonUp(0)) //Verifica se o botão direito do mouse (botão para esquiva) foi pressionado
+            if(Input.GetMouseButtonUp(0)) 
             {
                 _isCutting = false;
+                speed = initialSpeed;
+            }
+        }
+        void onDig()
+        {
+            if(Input.GetMouseButtonDown(0)) //Verifica se o botão esquedo do mouse (botão para ação) foi pressionado
+            {
+                _isDigging = true;
+                speed = 0f;
+            } 
+            if(Input.GetMouseButtonUp(0)) 
+            {
+                _isDigging = false;
                 speed = initialSpeed;
             }
         }
