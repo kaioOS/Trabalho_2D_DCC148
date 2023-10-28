@@ -13,11 +13,13 @@ public class Player : MonoBehaviour
     private bool _isRolling;
     private bool _isCutting;
     private bool _isDigging;
+    private bool _isWatering;
 
     private Vector2 _direction;
     private int handlingObj;
     //Colisão
     private Rigidbody2D rig;
+    private PlayerItems playerItems;
     
 
     public Vector2 direction
@@ -45,9 +47,15 @@ public class Player : MonoBehaviour
         get { return _isDigging; }
         set { _isDigging = value; }
     }
+    public bool isWatering
+    {
+        get { return _isWatering; }
+        set { _isWatering = value; }
+    }
     private void Start()
     {
         rig = GetComponent<Rigidbody2D>();
+        playerItems = GetComponent<PlayerItems>();
         initialSpeed = speed;
     }
     private void Update()
@@ -61,6 +69,10 @@ public class Player : MonoBehaviour
         {
             handlingObj = 2;
         }
+        else if(Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            handlingObj = 3;
+        }
         onInput();
         onRun(); 
         onRoll();
@@ -72,6 +84,10 @@ public class Player : MonoBehaviour
         {
             onDig();
         }
+        else if (handlingObj == 3)
+        {
+            onWater();
+        }
     }
     
     private void FixedUpdate()
@@ -82,7 +98,7 @@ public class Player : MonoBehaviour
     #region Movement
         void onInput()
         {
-            _direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+            direction = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         }
         void onMove()
         {
@@ -94,12 +110,12 @@ public class Player : MonoBehaviour
             if(Input.GetKeyDown(KeyCode.LeftShift)) //Verifica se o "shift" esquerdo (botão para correr) foi pressionado
             {
                 speed = runSpeed;
-                _isRunning = true;
+                isRunning = true;
             }
             if(Input.GetKeyUp(KeyCode.LeftShift)) //Verificar se o "shift" esquerdo (botão para correr) parou de ser pressionado
             {
                 speed = initialSpeed; //Para voltar para a velocidade inicial
-                _isRunning = false;
+                isRunning = false;
             }
         }
         void onRoll()
@@ -107,12 +123,12 @@ public class Player : MonoBehaviour
             if(Input.GetMouseButtonDown(1)) //Verifica se o botão direito do mouse (botão para esquiva) foi pressionado
             {
                 speed = runSpeed;
-                _isRolling = true;
+                isRolling = true;
             }
             if(Input.GetMouseButtonUp(1)) 
             {
                 speed = initialSpeed;
-                _isRolling = false;
+                isRolling = false;
             }
         }
     #endregion
@@ -122,12 +138,12 @@ public class Player : MonoBehaviour
         {
             if(Input.GetMouseButtonDown(0)) //Verifica se o botão esquedo do mouse (botão para ação) foi pressionado
             {
-                _isCutting = true;
+                isCutting = true;
                 speed = 0f;
             }
             if(Input.GetMouseButtonUp(0)) 
             {
-                _isCutting = false;
+                isCutting = false;
                 speed = initialSpeed;
             }
         }
@@ -135,14 +151,34 @@ public class Player : MonoBehaviour
         {
             if(Input.GetMouseButtonDown(0)) //Verifica se o botão esquedo do mouse (botão para ação) foi pressionado
             {
-                _isDigging = true;
+                isDigging = true;
                 speed = 0f;
             } 
             if(Input.GetMouseButtonUp(0)) 
             {
-                _isDigging = false;
+                isDigging = false;
                 speed = initialSpeed;
             }
+        }
+        void onWater()
+        {
+            if(Input.GetMouseButtonDown(0) && playerItems.currentWater > 0) //Verifica se o botão esquedo do mouse (botão para ação) foi pressionado
+            {
+                isWatering = true;          
+                speed = 0f;
+            }
+             
+            if(Input.GetMouseButtonUp(0) || playerItems.currentWater <= 0) //Parar de jogar água quando acabar ou parar de clicar o mouse
+            {
+                isWatering = false;
+                speed = initialSpeed;
+                if(playerItems.currentWater<0)
+                    playerItems.currentWater = 0;
+            }
+            if(isWatering)
+            {
+                playerItems.currentWater-= 0.1f;
+            }     
         }
     #endregion
 }

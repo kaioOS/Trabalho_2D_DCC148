@@ -9,7 +9,7 @@ public class Tree : MonoBehaviour
     [SerializeField] private GameObject woodPrefab;
     [SerializeField] private int totalWood;
     [SerializeField] private ParticleSystem leafs;
-     public void onHit()
+    public void onHit()
     {
         tree_Health--;
  
