@@ -16,7 +16,8 @@ public class Player : MonoBehaviour
     private bool _isWatering;
 
     private Vector2 _direction;
-    private int handlingObj;
+    [HideInInspector] public int handlingObj;
+
     //Colisão
     private Rigidbody2D rig;
     private PlayerItems playerItems;
@@ -63,28 +64,28 @@ public class Player : MonoBehaviour
 
         if(Input.GetKeyDown(KeyCode.Alpha1))
         {
-            handlingObj = 1;
+            handlingObj = 0;
         }
         else if(Input.GetKeyDown(KeyCode.Alpha2))
         {
-            handlingObj = 2;
+            handlingObj = 1;
         }
         else if(Input.GetKeyDown(KeyCode.Alpha3))
         {
-            handlingObj = 3;
+            handlingObj = 2;
         }
         onInput();
         onRun(); 
         onRoll();
-        if (handlingObj == 1)
+        if (handlingObj == 0)
         {
             onCut();
         }
-        else if (handlingObj == 2)
+        else if (handlingObj == 1)
         {
             onDig();
         }
-        else if (handlingObj == 3)
+        else if (handlingObj == 2)
         {
             onWater();
         }
