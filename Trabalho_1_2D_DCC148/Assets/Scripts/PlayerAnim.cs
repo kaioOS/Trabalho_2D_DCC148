@@ -2,18 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class PlayerAnim : MonoBehaviour
 {
     private Player player;
     private Animator anim;
-    // Start is called before the first frame update
+    private Casting cast;
+
     void Start()
     {
         player = GetComponent<Player>();
         anim = GetComponent<Animator>();
+        cast = FindObjectOfType<Casting>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         onMove();
@@ -92,4 +93,18 @@ public class NewBehaviourScript : MonoBehaviour
             }
         }
     #endregion
+
+    //chamado quando o jogador pressiona o botão Q na área de pesca
+    public void OnCastingStarted()
+    {
+        anim.SetTrigger("isCasting");
+        player.isPaused = true;
+    }
+
+    //chamado quando termina a animação de pescaria
+    public void OnCastingEnded()
+    {
+        cast.OnCasting();
+        player.isPaused = false;
+    }
 }

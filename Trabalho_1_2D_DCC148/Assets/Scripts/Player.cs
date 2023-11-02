@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
     public float speed;
     public float runSpeed;
     private float initialSpeed;
-
+    
+    public bool isPaused;
     private bool _isRunning;
     private bool _isRolling;
     private bool _isCutting;
@@ -61,39 +62,42 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
-
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            handlingObj = 0;
-        }
-        else if(Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            handlingObj = 1;
-        }
-        else if(Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            handlingObj = 2;
-        }
-        onInput();
-        onRun(); 
-        onRoll();
-        if (handlingObj == 0)
-        {
-            onCut();
-        }
-        else if (handlingObj == 1)
-        {
-            onDig();
-        }
-        else if (handlingObj == 2)
-        {
-            onWater();
+        if(!isPaused){
+            
+            if(Input.GetKeyDown(KeyCode.Alpha1))
+            {
+                handlingObj = 0;
+            }
+            else if(Input.GetKeyDown(KeyCode.Alpha2))
+            {
+                handlingObj = 1;
+            }
+            else if(Input.GetKeyDown(KeyCode.Alpha3))
+            {
+                handlingObj = 2;
+            }
+            onInput();
+            onRun(); 
+            onRoll();
+            if (handlingObj == 0)
+            {
+                onCut();
+            }
+            else if (handlingObj == 1)
+            {
+                onDig();
+            }
+            else if (handlingObj == 2)
+            {
+                onWater();
+            }
         }
     }
     
     private void FixedUpdate()
     {
-        onMove();   
+        if(!isPaused)
+            onMove();   
     }
 
     #region Movement

@@ -13,7 +13,6 @@ public class Water : MonoBehaviour
         player = FindObjectOfType<PlayerItems>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         if(detectingPlayer && Input.GetKeyDown(KeyCode.E))
