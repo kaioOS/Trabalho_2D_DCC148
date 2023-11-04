@@ -23,7 +23,7 @@ public class SlotFarm : MonoBehaviour
     private float currentWater;
     private bool dugHole; //Para verificar se já existe um buraco antes da cenoura
     private bool plantedCarrot; //Para verificar quando tocar o SFX da cenoura
-    private bool isTouching; //verdadeiro quando o player está enconstando na cenoura
+    private bool isTouching; //verdadeiro quando o player está encostando na cenoura
     PlayerItems playerItems;
 
     private void Start()
