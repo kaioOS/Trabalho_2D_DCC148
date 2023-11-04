@@ -79,18 +79,9 @@ public class Player : MonoBehaviour
             onInput();
             onRun(); 
             onRoll();
-            if (handlingObj == 0)
-            {
-                onCut();
-            }
-            else if (handlingObj == 1)
-            {
-                onDig();
-            }
-            else if (handlingObj == 2)
-            {
-                onWater();
-            }
+            onCut();
+            onDig();
+            onWater();
         }
     }
     
@@ -141,49 +132,61 @@ public class Player : MonoBehaviour
     #region Action
         void onCut()
         {
-            if(Input.GetMouseButtonDown(0)) //Verifica se o botão esquedo do mouse (botão para ação) foi pressionado
-            {
-                isCutting = true;
-                speed = 0f;
+            if (handlingObj == 0){
+                if(Input.GetMouseButtonDown(0)) //Verifica se o botão esquedo do mouse (botão para ação) foi pressionado
+                {
+                    isCutting = true;
+                    speed = 0f;
+                }
+                if(Input.GetMouseButtonUp(0)) 
+                {
+                    isCutting = false;
+                    speed = initialSpeed;
+                }
             }
-            if(Input.GetMouseButtonUp(0)) 
-            {
+            else
                 isCutting = false;
-                speed = initialSpeed;
-            }
         }
         void onDig()
         {
-            if(Input.GetMouseButtonDown(0)) //Verifica se o botão esquedo do mouse (botão para ação) foi pressionado
-            {
-                isDigging = true;
-                speed = 0f;
-            } 
-            if(Input.GetMouseButtonUp(0)) 
-            {
-                isDigging = false;
-                speed = initialSpeed;
+            if (handlingObj == 1){
+                if(Input.GetMouseButtonDown(0)) //Verifica se o botão esquedo do mouse (botão para ação) foi pressionado
+                {
+                    isDigging = true;
+                    speed = 0f;
+                } 
+                if(Input.GetMouseButtonUp(0)) 
+                {
+                    isDigging = false;
+                    speed = initialSpeed;
+                }
             }
+            else
+                isDigging = false;
         }
         void onWater()
         {
-            if(Input.GetMouseButtonDown(0) && playerItems.currentWater > 0) //Verifica se o botão esquedo do mouse (botão para ação) foi pressionado
-            {
-                isWatering = true;          
-                speed = 0f;
+            if (handlingObj == 2){
+                if(Input.GetMouseButtonDown(0) && playerItems.currentWater > 0) //Verifica se o botão esquedo do mouse (botão para ação) foi pressionado
+                {
+                    isWatering = true;          
+                    speed = 0f;
+                }
+                
+                if(Input.GetMouseButtonUp(0) || playerItems.currentWater <= 0) //Parar de jogar água quando acabar ou parar de clicar o mouse
+                {
+                    isWatering = false;
+                    speed = initialSpeed;
+                    if(playerItems.currentWater<0)
+                        playerItems.currentWater = 0;
+                }
+                if(isWatering)
+                {
+                    playerItems.currentWater-= 0.1f;
+                }
             }
-             
-            if(Input.GetMouseButtonUp(0) || playerItems.currentWater <= 0) //Parar de jogar água quando acabar ou parar de clicar o mouse
-            {
-                isWatering = false;
-                speed = initialSpeed;
-                if(playerItems.currentWater<0)
-                    playerItems.currentWater = 0;
-            }
-            if(isWatering)
-            {
-                playerItems.currentWater-= 0.1f;
-            }     
+            else
+                isWatering = false;  
         }
     #endregion
 }

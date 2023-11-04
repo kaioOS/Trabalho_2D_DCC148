@@ -99,14 +99,15 @@ public class PlayerAnim : MonoBehaviour
         }
         void onRun()
         {
-            if(player.isRunning)
+            if(player.isRunning && player.direction.sqrMagnitude > 0)
             {
                 anim.SetInteger("transition",2);
             }
         }
         void onRoll()
         {
-            anim.SetTrigger("isRolling");
+            if(!anim.GetCurrentAnimatorStateInfo(0).IsName("rolling")) //impede que execute uma animação por cima da outra
+                anim.SetTrigger("isRolling");
         }
     #endregion
     #region Action

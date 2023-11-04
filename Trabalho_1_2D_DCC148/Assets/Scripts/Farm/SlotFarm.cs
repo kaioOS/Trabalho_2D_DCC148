@@ -23,6 +23,7 @@ public class SlotFarm : MonoBehaviour
     private float currentWater;
     private bool dugHole; //Para verificar se já existe um buraco antes da cenoura
     private bool plantedCarrot; //Para verificar quando tocar o SFX da cenoura
+    private bool isTouching; //verdadeiro quando o player está enconstando na cenoura
     PlayerItems playerItems;
 
     private void Start()
@@ -46,7 +47,7 @@ public class SlotFarm : MonoBehaviour
                 plantedCarrot = true;                
             }
 
-            if(Input.GetKeyDown(KeyCode.E) && plantedCarrot)
+            if(Input.GetKeyDown(KeyCode.E) && plantedCarrot && isTouching)
             {
                 audioSource.PlayOneShot(carrotSFX);
                 spriteRenderer.sprite = hole;
@@ -76,12 +77,20 @@ public class SlotFarm : MonoBehaviour
         {
             detecting = true;
         }
+        if(collision.CompareTag("Player"))
+        {
+            isTouching = true;
+        }
     }
     private void OnTriggerExit2D(Collider2D collision)
     {
         if(collision.CompareTag("Water"))
         {
             detecting = false;
+        }
+        if(collision.CompareTag("Player"))
+        {
+            isTouching = false;
         }
     }
 }
