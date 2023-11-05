@@ -31,13 +31,10 @@ public class Casting : MonoBehaviour
         int randomValue = Random.Range(1, 100);
 
         if(randomValue <= percentage){
-            Instantiate(fishPrefab, player.transform.position + new Vector3(0f, Random.Range(-2, -1f), 0f), Quaternion.identity);
-            Debug.Log("Pescou!");
+            Instantiate(fishPrefab, player.transform.position + new Vector3(0f, Random.Range(2, 1f), 0f), Quaternion.identity);
         }
-        else
-            Debug.Log("Não pescou!");
-
     }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if(collision.CompareTag("Player"))

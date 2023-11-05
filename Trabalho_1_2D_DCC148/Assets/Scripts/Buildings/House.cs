@@ -36,6 +36,7 @@ public class House : MonoBehaviour
         if(detectingPlayer && Input.GetKeyDown(KeyCode.E) && playerItems.currentWood >= woodAmount)
         {
             //inicia a construção da casa
+            player.transform.eulerAngles = new Vector2(0, 0);
             isBegining = true;
             playerAnim.OnHammeringStarted();
             houseSprite.color = startColor;
@@ -53,6 +54,7 @@ public class House : MonoBehaviour
                 playerAnim.OnHammeringEnded();
                 houseSprite.color = endColor;
                 player.isPaused = false;
+                isBegining = false;
                 houseCollider.SetActive(true);
             }
         }

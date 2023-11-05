@@ -67,7 +67,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.020709991, y: -0.008876324}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -78,7 +78,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.78105545, y: 0.7928896}
   m_EdgeRadius: 0
 --- !u!114 &7551920868229221538
 MonoBehaviour:
@@ -100,7 +100,7 @@ MonoBehaviour:
   carrot: {fileID: 1896984048, guid: ca7f07fffb7232a48b81a26a69c02657, type: 3}
   digAmount: 4
   detecting: 0
-  waterAmount: 2
+  waterAmount: 1
 --- !u!82 &3577048621716656666
 AudioSource:
   m_ObjectHideFlags: 0
