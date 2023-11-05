@@ -29,7 +29,7 @@ public class Skeleton: MonoBehaviour
         {
             Vector2 playerPosition = player.transform.position;
             Vector2 skeletonPosition = transform.position;
-
+            Vector2 moveDirection = (playerPosition - skeletonPosition).normalized;
             float distanceToPlayer = Vector2.Distance(playerPosition, skeletonPosition);
             if(Vector2.Distance(transform.position, player.transform.position) <= 1.25f)
             {
@@ -38,12 +38,13 @@ public class Skeleton: MonoBehaviour
             else 
             {
                 animControl.PlayAnim(1);
-                Vector2 moveDirection = (playerPosition - skeletonPosition).normalized;
-                if(playerPosition.x > skeletonPosition.x)
+                
+                if(playerPosition.x > skeletonPosition.x)  
                     transform.Translate(moveDirection * movementSpeed * Time.deltaTime);
                 else
                 {
-                    transform.Translate(-moveDirection * movementSpeed * Time.deltaTime);
+                    moveDirection.x = -moveDirection.x;
+                    transform.Translate(moveDirection * movementSpeed * Time.deltaTime);
                 }
             }
             //rotaciona o inimigo
@@ -55,5 +56,7 @@ public class Skeleton: MonoBehaviour
             else transform.eulerAngles = new Vector2(0, 180); 
         }
 
+        
     }
+    
 }

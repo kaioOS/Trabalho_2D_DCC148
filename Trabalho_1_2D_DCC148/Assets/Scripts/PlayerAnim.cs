@@ -37,8 +37,14 @@ public class PlayerAnim : MonoBehaviour
             timeCount += Time.deltaTime;
             if(timeCount >= recoveryTime)
             {
+                player.healthBar--;
                 isHitting = false;
                 timeCount = 0f;
+            }
+            if(player.healthBar <= 0)
+            {
+                anim.SetTrigger("isDead");
+                player.isDead();   
             }
         }
     }

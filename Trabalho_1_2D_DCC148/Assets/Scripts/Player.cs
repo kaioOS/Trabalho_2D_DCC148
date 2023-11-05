@@ -8,7 +8,8 @@ public class Player : MonoBehaviour
     public float speed;
     public float runSpeed;
     private float initialSpeed;
-    
+    public int healthBar = 10;
+    private int initialHealth;
     public bool isPaused;
     private bool _isRunning;
     private bool _isRolling;
@@ -60,7 +61,7 @@ public class Player : MonoBehaviour
         rig = GetComponent<Rigidbody2D>();
         playerItems = GetComponent<PlayerItems>();
         initialSpeed = speed;
-
+        initialHealth = healthBar;
         canvas.enabled = false;
     }
     private void Update()
@@ -212,4 +213,15 @@ public class Player : MonoBehaviour
                 isWatering = false;  
         }
     #endregion
+    public void isDead()
+    {
+        isPaused = true;
+        transform.position = new Vector2(-0.05f,-7.25f);
+        healthBar = initialHealth;
+        playerItems.currentWood = 0;
+        playerItems.currentWater = 0;
+        playerItems.carrots = 0;
+        playerItems.fishes = 0; 
+        isPaused = false;  
+    }
 }
