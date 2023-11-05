@@ -20,6 +20,7 @@ public class HUDController : MonoBehaviour
     private PlayerItems playerItems;
     private Player player;
 
+
     private void Awake()
     {
         playerItems = FindObjectOfType<PlayerItems>();
@@ -38,7 +39,7 @@ public class HUDController : MonoBehaviour
     }
 
     void Update()
-    {
+    {   
         //atualiza progresso das barras
         waterUIBar.fillAmount = playerItems.currentWater / playerItems.waterLimit;
         woodUIBar.fillAmount = playerItems.currentWood / playerItems.woodLimit;
@@ -53,5 +54,6 @@ public class HUDController : MonoBehaviour
             else
                 toolsUI[i].color = unselectColor;
         }
+
     }
 }

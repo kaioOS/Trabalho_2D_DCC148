@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     private bool _isCutting;
     private bool _isDigging;
     private bool _isWatering;
+    private bool gamePaused = false;
 
     private Vector2 _direction;
     [HideInInspector] public int handlingObj;
@@ -22,7 +23,7 @@ public class Player : MonoBehaviour
     //Colisão
     private Rigidbody2D rig;
     private PlayerItems playerItems;
-    
+    [SerializeField] private Canvas canvas;   
 
     public Vector2 direction
     {
@@ -59,6 +60,8 @@ public class Player : MonoBehaviour
         rig = GetComponent<Rigidbody2D>();
         playerItems = GetComponent<PlayerItems>();
         initialSpeed = speed;
+
+        canvas.enabled = false;
     }
     private void Update()
     {
@@ -76,12 +79,32 @@ public class Player : MonoBehaviour
             {
                 handlingObj = 2;
             }
-            onInput();
-            onRun(); 
-            onRoll();
-            onCut();
-            onDig();
-            onWater();
+
+            if(!canvas.enabled){
+                onInput();
+                onRun(); 
+                onRoll();
+                onCut();
+                onDig();
+                onWater();
+
+            }
+
+            if (gamePaused)
+            {
+                Time.timeScale = 0; // Pausa a cena
+            }
+            else
+            {
+                Time.timeScale = 1; // Despausa a cena
+            }
+
+            if(Input.GetKeyDown(KeyCode.Escape))
+            {
+                gamePaused = !gamePaused;
+                canvas.enabled = !canvas.enabled;
+                                     
+            }
         }
     }
     

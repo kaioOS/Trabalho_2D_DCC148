@@ -16,20 +16,36 @@ public class Skeleton: MonoBehaviour
     [SerializeField] private AnimationControl animControl;
 
     private Player player;
-    
+    public float movementSpeed = 2.0f;
     void Start()
     {
         currentHealth = totalHealth;
-        player = FindObjectOfType<Player>();        
+        player = FindObjectOfType<Player>();
     }
 
     void Update()
-    {   
+    {
         if(!isDead)
         {
-            if(Vector2.Distance(transform.position, player.transform.position) <= 1.5f) animControl.PlayAnim(2); //distancia mínima para atacar
-            else animControl.PlayAnim(1);
+            Vector2 playerPosition = player.transform.position;
+            Vector2 skeletonPosition = transform.position;
 
+            float distanceToPlayer = Vector2.Distance(playerPosition, skeletonPosition);
+            if(Vector2.Distance(transform.position, player.transform.position) <= 1.25f)
+            {
+                animControl.PlayAnim(2); //distancia mínima para atacar
+            } 
+            else 
+            {
+                animControl.PlayAnim(1);
+                Vector2 moveDirection = (playerPosition - skeletonPosition).normalized;
+                if(playerPosition.x > skeletonPosition.x)
+                    transform.Translate(moveDirection * movementSpeed * Time.deltaTime);
+                else
+                {
+                    transform.Translate(-moveDirection * movementSpeed * Time.deltaTime);
+                }
+            }
             //rotaciona o inimigo
             float posX = player.transform.position.x - transform.position.x;
 
