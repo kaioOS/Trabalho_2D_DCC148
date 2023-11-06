@@ -8,8 +8,8 @@ public class Player : MonoBehaviour
     public float speed;
     public float runSpeed;
     private float initialSpeed;
-    public int healthBar = 10;
-    private int initialHealth;
+    public float healthBar = 10;
+    public float initialHealth;
     public bool isPaused;
     private bool _isRunning;
     private bool _isRolling;
@@ -216,7 +216,6 @@ public class Player : MonoBehaviour
     public void isDead()
     {
         isPaused = true;
-        transform.position = new Vector2(-0.05f,-7.25f);
         healthBar = initialHealth;
         playerItems.currentWood = 0;
         playerItems.currentWater = 0;

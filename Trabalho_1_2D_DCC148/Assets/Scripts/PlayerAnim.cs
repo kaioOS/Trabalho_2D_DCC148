@@ -15,7 +15,7 @@ public class PlayerAnim : MonoBehaviour
     private bool isHitting;
     private float timeCount;
     private float recoveryTime = 1f;
-
+    [SerializeField] private float timeToRespawn;
 
     void Start()
     {
@@ -43,10 +43,19 @@ public class PlayerAnim : MonoBehaviour
             }
             if(player.healthBar <= 0)
             {
-                anim.SetTrigger("isDead");
-                player.isDead();   
+                //anim.SetTrigger("isDead");
+                player.isDead();                    
+                player.transform.position = new Vector2(-0.05f,-7.25f);
+
+                //StartCoroutine(RespawnDelay());
             }
         }
+    }
+
+    IEnumerator RespawnDelay()
+    {
+        yield return new WaitForSeconds(timeToRespawn);
+        
     }
 
     #region Attack

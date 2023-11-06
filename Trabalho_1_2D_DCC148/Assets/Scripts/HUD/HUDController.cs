@@ -10,6 +10,7 @@ public class HUDController : MonoBehaviour
     [SerializeField] private Image woodUIBar;
     [SerializeField] private Image carrotUIBar;
     [SerializeField] private Image fishUIBar;
+    [SerializeField] private Image lifeUIBar;
 
     [Header("Tools")]
     public List<Image> toolsUI = new List<Image>();
@@ -34,6 +35,7 @@ public class HUDController : MonoBehaviour
         woodUIBar.fillAmount = 0f;
         carrotUIBar.fillAmount = 0f;
         fishUIBar.fillAmount = 0f;
+        lifeUIBar.fillAmount = 1f;
 
 
     }
@@ -45,6 +47,7 @@ public class HUDController : MonoBehaviour
         woodUIBar.fillAmount = playerItems.currentWood / playerItems.woodLimit;
         carrotUIBar.fillAmount = playerItems.carrots / playerItems.carrotLimit;
         fishUIBar.fillAmount = playerItems.fishes / playerItems.fishLimit;
+        lifeUIBar.fillAmount = player.healthBar / player.initialHealth;
 
         toolsUI[player.handlingObj].color = selectColor;
 
