@@ -7,7 +7,7 @@
  
  # ISLAND VALLEY
  
-# Tutorial:
+# Tutorial
 # Keybindings:
     1-> Machado
     2-> Pá
