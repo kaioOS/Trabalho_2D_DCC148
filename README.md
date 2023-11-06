@@ -9,6 +9,7 @@
  
 # Tutorial
 # Keybindings:
+    Direcionais e A W S D -> Movimentam o personagem
     1-> Machado
     2-> Pá
     3-> Regador
