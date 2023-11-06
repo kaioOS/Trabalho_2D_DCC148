@@ -14,9 +14,9 @@
     2-> Pá
     3-> Regador
     Botão Esquerdo do Mouse -> Usa a Ferramenta escolhida pelos números
-    Shift Esquerdo-> Corre
     Botão Direito do Mouse -> Rola
-    E-> Coleta água ou Cenoura
+    Shift Esquerdo-> Corre
+    E-> Botão de Ação - coleta água, cenoura e constrói
     Q-> Pesca
     Esc-> Opções
     
