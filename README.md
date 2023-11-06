@@ -34,6 +34,7 @@
     - https://craftpix.net/freebies/free-summer-pixel-art-backgrounds/?num=1&count=14&sq=summer&pos=11
     - https://assetstore.unity.com/packages/2d/fonts/free-pixel-font-thaleah-140059
     - https://www.crieseusjogos.com.br/
+    - Stardew Valley
     
             
     
