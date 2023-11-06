@@ -2,7 +2,7 @@
  Trabalho 1 da disciplina de Desenvolvimento de Jogos
 
  Alunos:
- Kaio Oliveira e Sousa - 202165080AC | Ticiano de Oliveira Fracette - 202065189AC
+ Kaio de Oliveira e Sousa - 202165080AC | Ticiano de Oliveira Fracette - 202065189AC
 
  
  # ISLAND VALLEY
